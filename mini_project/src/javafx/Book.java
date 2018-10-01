@@ -1,6 +1,16 @@
-package javafx.Miniproject;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javafx;
 
+import mini_project.book;
+import mini_project.database;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,14 +21,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import mini_project.Database;
 import mini_project.book;
-
+import mini_project.database;
 
 public class Book extends Application {
-
-    
-    @Override
+     @Override
     public void start(Stage primaryStage) {
         Label lBookName = new Label("Book Name:");
         Label lIsbnNo = new Label("ISBN No.:");
@@ -31,7 +38,7 @@ public class Book extends Application {
         
         Button button = new Button("Submit");
         GridPane gp = new GridPane();
-        gp.setMinSize(1350, 700);
+        
         gp.setHgap(5);
         gp.setVgap(8);
         
@@ -39,15 +46,20 @@ public class Book extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                String Name = tfBookName.getText();
-                String isbn = tfIsbnNo.getText();
-                String publisherName = tfPublisherName.getText();
-                String authorName = tfAuthorName.getText();
-                
-                String uri = "jdbc:mysql://localhost:3306/miniproject";
-                Database db = new Database(uri,"root","root");
-                Connection c = db.openConnection();
-                book.insertBook(Name,isbn,publisherName,authorName,c);                
+                try {
+                    String Name = tfBookName.getText();                   
+                    String isbn = tfIsbnNo.getText();
+                    String publisherName = tfPublisherName.getText();
+                    String authorName = tfAuthorName.getText();
+                    
+                    String uri = "jdbc:mysql://localhost:3306/miniproject";
+                    database db = new database(uri,"root","root");
+                    Connection c = db.openConnection();
+                    book.insertBook(Name,isbn,publisherName,authorName,c);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
           
         });
@@ -65,12 +77,11 @@ public class Book extends Application {
         primaryStage.setTitle("Book");
         primaryStage.setScene(scene);
         primaryStage.show();
+
         
     }
-    public static void main(String[] args) throws Exception {
-        String uri = "jdbc:mysql://localhost:3306/miniproject";
-        Database db = new Database(uri,"root","root");
-        Connection c = db.openConnection();
-        
+    public static void main(String[] args) {
+        launch(args);
     }
+    
 }
