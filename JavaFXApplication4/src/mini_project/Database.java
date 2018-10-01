@@ -32,5 +32,5 @@ public class Database {
         System.out.println("user"+d.username);
         System.out.println("pass"+d.password);
         System.out.println("uri"+d.uri);
-    }
+}
 }
