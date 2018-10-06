@@ -1,2 +1,0 @@
-alter table book change isbn_no string varchar(50);
-

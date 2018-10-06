@@ -1,4 +1,3 @@
-
 package mini_project;
 
 import java.sql.Connection;
@@ -20,6 +19,7 @@ public class book {
         this.publisher_name = publisher_name;
         this.author_name = author_name;
     }
+    
     public static void insertBook(String book_name,String isbn_no,String publisher_name,String author_name,Connection con) throws SQLException{
         String sql = "insert into book values(null,?,?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -40,7 +40,6 @@ public class book {
             System.out.println(rs.getString(2));
             System.out.println(rs.getString(3));
             System.out.println(rs.getString(4));
-            
         }
         rs.close();
         ps.close();
@@ -85,7 +84,4 @@ public class book {
     public void setAuthor_name(String author_name) {
         this.author_name = author_name;
     }
-
-   
-    
-    }
+}
