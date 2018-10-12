@@ -74,7 +74,7 @@ public class Student{
                     String Name = tfStudentName.getText();                   
                     String PhoneNo = tfPhoneNo.getText();
                     
-                    String uri = "jdbc:mysql://localhost:3306/miniproject";
+                    String uri = "jdbc:mysql://localhost:3306/Mini_project";
                     Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
                     student.insertStudent(Name,PhoneNo,c);

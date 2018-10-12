@@ -64,7 +64,7 @@ public class RETURN{
                 try {
                     int BorrowID = Integer.parseInt(tfborrow_id.getText());                   
                     
-                    String uri = "jdbc:mysql://localhost:3306/miniproject";
+                    String uri = "jdbc:mysql://localhost:3306/Mini_project";
                     Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
                     Return.insertReturn(BorrowID,c);
