@@ -18,23 +18,75 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import mini_project.borrow;
-import mini_project.database;
+import mini_project.Database;
 
 
-public class Borrow extends Application {
-    
-    @Override
-    public void start(Stage primaryStage) {
-        Label lroll_no = new Label("Student Roll No.:");
-        Label lBook_id = new Label("Book ID:");
+public class Borrow {
+    Label lroll_no;
+    Label lBook_id;
+    TextField tfroll_no;
+    TextField tfBook_id;
+    Button button;
+
+    GridPane gp;
+
+    public Label getLroll_no() {
+        return lroll_no;
+    }
+
+    public void setLroll_no(Label lroll_no) {
+        this.lroll_no = lroll_no;
+    }
+
+    public Label getlBook_id() {
+        return lBook_id;
+    }
+
+    public void setlBook_id(Label lBook_id) {
+        this.lBook_id = lBook_id;
+    }
+
+    public GridPane getGp() {
+        return gp;
+    }
+
+    public void setGp(GridPane gp) {
+        this.gp = gp;
+    }
+
+    public TextField getTfroll_no() {
+        return tfroll_no;
+    }
+
+    public void setTfroll_no(TextField tfroll_no) {
+        this.tfroll_no = tfroll_no;
+    }
+
+    public TextField getTfBook_id() {
+        return tfBook_id;
+    }
+
+    public void setTfBook_id(TextField tfBook_id) {
+        this.tfBook_id = tfBook_id;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public Borrow() {
         
-        TextField tfroll_no = new TextField();
-        TextField tfBook_id = new TextField();
-        
-        
-        Button button = new Button("Submit");
-        GridPane gp = new GridPane();
+        lroll_no = new Label("Student Roll No.:");
+        lBook_id = new Label("Book ID:");
+        tfroll_no = new TextField();
+        tfBook_id = new TextField();
+ 
+        button = new Button("Submit");
+        gp = new GridPane();
         
         gp.setHgap(5);
         gp.setVgap(8);
@@ -44,14 +96,14 @@ public class Borrow extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    int RollNo = Integer.parseInt(tfroll_no.getText());                   
+                    int RollNo = Integer.parseInt(tfroll_no.getText());   
                     int BookID = Integer.parseInt(tfBook_id.getText());
                     
                     String uri = "jdbc:mysql://localhost:3306/miniproject";
-                    database db = new database(uri,"root","root");
+                    Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
                     
-                    borrow.insertBorrow(RollNo,BookID,c);
+                    mini_project.Borrow.insertBorrow(RollNo,BookID,c);
                     System.out.println("Done");
                     
                 } catch (Exception ex) {
@@ -62,20 +114,12 @@ public class Borrow extends Application {
         gp.add(lroll_no,0,0);
         gp.add(tfroll_no,1, 0);
         gp.add(lBook_id,0,1);
-        gp.add(tfBook_id,1, 1);
-        
+        gp.add(tfBook_id,1, 1); 
         gp.add(button,1,4);
-        
-        Scene scene = new Scene(gp);
-        primaryStage.setTitle("Borrow");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        
+    
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
+  
+    
     
     
 }

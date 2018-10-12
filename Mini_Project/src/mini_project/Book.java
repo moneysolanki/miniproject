@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class book {
+public class Book {
     public int book_id;
     public String book_name;
     public String isbn_no;
     public String publisher_name;
     public String author_name;
 
-    public book(int book_id, String book_name, String isbn_no, String publisher_name, String author_name) {
+    public Book(int book_id, String book_name, String isbn_no, String publisher_name, String author_name) {
         this.book_id = book_id;
         this.book_name = book_name;
         this.isbn_no = isbn_no;
@@ -44,7 +44,29 @@ public class book {
         rs.close();
         ps.close();
     }
-
+   /*
+    public static ArrayList<Book> getBook(Connection con) throws SQLException {
+        ArrayList bookArray = new ArrayList();
+        
+        String sql = "select * from book;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String ISBN = rs.getString(3);
+            String publisher = rs.getString(4);
+            String author =  rs.getString(5);
+         Book b = new Book(id ,name, ISBN,  publisher, author);
+         bookArray.add(b);
+        } 
+        rs.close();
+        ps.close();
+        //ObservableList<String>observableList = FXCollections.observableList(bookArray);
+        return bookArray;
+    
+    } */
+    
     public int getBook_id() {
         return book_id;
     }

@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class database {
+public class Database {
     private Connection con;
     private String uri;
     private String username;
     private String password;
 
-    public database(String uri, String username, String password) {
+    public Database(String uri, String username, String password) {
         this.uri = uri;
         this.username = username;
         this.password = password;

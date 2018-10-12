@@ -6,14 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class borrow {
+public class Borrow {
 
     public int borrow_id;
     public int roll_no;
     public int book_id;
 
 
-    public borrow(int borrow_id, int roll_no, int book_id) {
+    public Borrow(int borrow_id, int roll_no, int book_id) {
         this.borrow_id = borrow_id;
         this.roll_no = roll_no;
         this.book_id = book_id;

@@ -1,7 +1,7 @@
 package javafx;
 
 import mini_project.student;
-import mini_project.database;
+import mini_project.Database;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -10,17 +10,25 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import layout.TabGUI;
 import mini_project.student;
-import mini_project.database;
+import mini_project.Database;
 
 public class Student extends Application {
+
+
+    public Node gp;
      @Override
     public void start(Stage primaryStage) {
         Label lStudentName = new Label("Student Name:");
@@ -43,7 +51,7 @@ public class Student extends Application {
                     String PhoneNo = tfPhoneNo.getText();
                     
                     String uri = "jdbc:mysql://localhost:3306/miniproject";
-                    database db = new database(uri,"root","root");
+                    Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
                     student.insertStudent(Name,PhoneNo,c);
                     
@@ -59,7 +67,16 @@ public class Student extends Application {
         gp.add(tfPhoneNo,1, 1);
         gp.add(button,1,4);
         
-        Scene scene = new Scene(gp);
+        TabPane tabPane = new TabPane();
+        Tab tab1 = new Tab("Student");
+        tabPane.getTabs().add(tab1);
+        
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(tabPane);
+        borderPane.setLeft(gp);
+        
+        Scene scene = new Scene(borderPane);
+        
         primaryStage.setTitle("Student");
         primaryStage.setScene(scene);
         primaryStage.show();

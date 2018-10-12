@@ -1,43 +1,80 @@
 package javafx;
 
-import mini_project.book;
-import mini_project.database;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import mini_project.book;
-import mini_project.database;
+import mini_project.Database;
 
-public class Book extends Application {
-     @Override
-    public void start(Stage primaryStage) {
-        Label lBookName = new Label("Book Name:");
-        Label lIsbnNo = new Label("ISBN No.:");
-        Label lPublisherName = new Label("Publisher Name:");
-        Label lAuthorName = new Label("Author Name:");
-        TextField tfBookName = new TextField();
-        TextField tfIsbnNo = new TextField();
-        TextField tfPublisherName = new TextField();
-        TextField tfAuthorName = new TextField();
+public class Book {
+    Label lBookName;
+    Label lIsbnNo;
+    Label lPublisherName;
+    Label lAuthorName;
+    TextField tfBookName;
+    TextField tfIsbnNo;
+    TextField tfPublisherName;
+    TextField tfAuthorName;
+    GridPane gp;
+    
+    public GridPane getGp() {
+        return gp;
+    }
+
+    public void setGp(GridPane gp) {
+        this.gp = gp;
+    }
+
+    public Label getlBookName() {
+        return lBookName;
+    }
+
+    public void setlBookName(Label lBookName) {
+        this.lBookName = lBookName;
+    }
+
+    public Label getlIsbnNo() {
+        return lIsbnNo;
+    }
+
+    public void setlIsbnNo(Label lIsbnNo) {
+        this.lIsbnNo = lIsbnNo;
+    }
+
+    public Label getlPublisherName() {
+        return lPublisherName;
+    }
+
+    public void setlPublisherName(Label lPublisherName) {
+        this.lPublisherName = lPublisherName;
+    }
+
+    public Label getlAuthorName() {
+        return lAuthorName;
+    }
+
+    public void setlAuthorName(Label lAuthorName) {
+        this.lAuthorName = lAuthorName;
+    }
+    
+    public Book(){
+        
+        lBookName = new Label("Book Name:");
+        lIsbnNo = new Label("ISBN No.:");
+        lPublisherName = new Label("Publisher Name:");
+        lAuthorName = new Label("Author Name:");
+        tfBookName= new TextField();
+        tfIsbnNo = new TextField();
+        tfPublisherName = new TextField();
+        tfAuthorName = new TextField();
         
         Button button = new Button("Submit");
-        GridPane gp = new GridPane();
-        
-        gp.setHgap(5);
-        gp.setVgap(8);
-        
+               
        button.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -49,9 +86,9 @@ public class Book extends Application {
                     String authorName = tfAuthorName.getText();
                     
                     String uri = "jdbc:mysql://localhost:3306/miniproject";
-                    database db = new database(uri,"root","root");
+                    Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
-                    book.insertBook(Name,isbn,publisherName,authorName,c);
+                    mini_project.Book.insertBook(Name,isbn,publisherName,authorName,c);
                     
                 } catch (Exception ex) {
                     Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,6 +96,10 @@ public class Book extends Application {
     }
           
         });
+        gp = new GridPane();
+        
+        gp.setHgap(5);
+        gp.setVgap(8);
         gp.add(lBookName,0,0);
         gp.add(tfBookName,1, 0);
         gp.add(lIsbnNo,0,1);
@@ -69,13 +110,37 @@ public class Book extends Application {
         gp.add(tfAuthorName,1, 3);
         gp.add(button,1,4);
         
-        Scene scene = new Scene(gp);
-        primaryStage.setTitle("Book");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+       
+        /*
+        ToolBar toolbar = new ToolBar();
+        HBox statusbar = new HBox();
+        final Label label = new Label("Address Book");
+        
+ 
+        table.setEditable(true);
+ 
+        TableColumn firstNameCol = new TableColumn("First Name");
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+        
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+ 
+        final VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.setPadding(new Insets(10, 0, 0, 10));
+        vbox.getChildren().addAll(label, table);
+ 
+        
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+        borderPane.setLeft(gp);
+        borderPane.setRight(table);
+        */
+  
+        
     }
+
     
-    public static void main(String[] args) {
-        launch(args);
+       
+        
     }
-}
+

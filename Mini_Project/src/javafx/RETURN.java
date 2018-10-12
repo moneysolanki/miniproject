@@ -1,6 +1,6 @@
 package javafx;
 
-import mini_project.database;
+import mini_project.Database;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import mini_project.Return;
-import mini_project.database;
+import mini_project.Database;
 
 public class RETURN extends Application {
      @Override
@@ -37,7 +37,7 @@ public class RETURN extends Application {
                     int BorrowID = Integer.parseInt(tfborrow_id.getText());                   
                     
                     String uri = "jdbc:mysql://localhost:3306/miniproject";
-                    database db = new database(uri,"root","root");
+                    Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
                     Return.insertReturn(BorrowID,c);
                     
