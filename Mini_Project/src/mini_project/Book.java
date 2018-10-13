@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import static javafx.collections.FXCollections.observableList;
+import javafx.collections.ObservableList;
 
 public class Book {
     public int book_id;
@@ -30,24 +33,9 @@ public class Book {
         ps.executeUpdate();
         ps.close();
     }
-   
-    public static void getBook(Connection con) throws SQLException{
-        String sql = "select * from book;";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){
-            System.out.println(rs.getInt(1));
-            System.out.println(rs.getString(2));
-            System.out.println(rs.getString(3));
-            System.out.println(rs.getString(4));
-        }
-        rs.close();
-        ps.close();
-    }
-   /*
-    public static ArrayList<Book> getBook(Connection con) throws SQLException {
-        ArrayList bookArray = new ArrayList();
-        
+ 
+    public static ObservableList<Book> getBook(Connection con) throws SQLException {
+        ObservableList<Book> bookArray = FXCollections.observableArrayList();
         String sql = "select * from book;";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -57,15 +45,14 @@ public class Book {
             String ISBN = rs.getString(3);
             String publisher = rs.getString(4);
             String author =  rs.getString(5);
-         Book b = new Book(id ,name, ISBN,  publisher, author);
-         bookArray.add(b);
+            Book b = new Book(id ,name, ISBN,  publisher, author);
+            bookArray.add(b);
         } 
         rs.close();
         ps.close();
-        //ObservableList<String>observableList = FXCollections.observableList(bookArray);
         return bookArray;
     
-    } */
+    } 
     
     public int getBook_id() {
         return book_id;

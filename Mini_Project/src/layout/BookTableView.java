@@ -27,8 +27,8 @@ public class BookTableView{
     public BookTableView() throws Exception{
                
         String uri = "jdbc:mysql://localhost:3306/Mini_project";
-       Database db = new Database(uri,"root","root");
-         ObservableList<Book> bookArray = Book.getBook(db.openConnection());
+        Database db = new Database(uri,"root","root");
+        ObservableList<Book> bookArray = Book.getBook(db.openConnection());
         table = new TableView();
         lBook = new Label("Book");
         
