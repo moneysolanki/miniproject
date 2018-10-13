@@ -13,69 +13,65 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import layout.StudentTableView;
+import layout.ReturnTableView;
 import mini_project.Database;
 
-public class Student {
+
+
+public class Return {
     Label name;
     Label ans;
-    Label lStudentName;
-    Label lPhoneNo;
-    TextField tfStudentName;
-    TextField tfPhoneNo ;
-    Button button ;
+    Label lborrow_id;
+    TextField tfborrow_id;
+    Button button;
     GridPane gp;
     BorderPane bp;
-    StudentTableView stv ;
+    ReturnTableView rtv ;
     TableView t ;
 
-    
-    public Student() throws Exception{
-        lStudentName = new Label("Student Name:");
-        lPhoneNo = new Label("Phone No.:");
-        tfStudentName = new TextField();
-        tfPhoneNo = new TextField();
-        name = new Label("Student");
-        ans = new Label();
+    public Return() throws Exception{
+        lborrow_id = new Label("Borrow ID:");
+        tfborrow_id = new TextField();
         button = new Button("Submit");
-  
+        name = new Label("Return");
+        ans = new Label();
+        
+        
        button.setOnAction(new EventHandler<ActionEvent>() {
             
-            @Override
             public void handle(ActionEvent event) {
                 try {
-                    String Name = tfStudentName.getText();                   
-                    String PhoneNo = tfPhoneNo.getText();
+                    int BorrowID = Integer.parseInt(tfborrow_id.getText());                   
                     
                     String uri = "jdbc:mysql://localhost:3306/Mini_project";
                     Database db = new Database(uri,"root","root");
                     Connection c = db.openConnection();
-                    mini_project.Student.insertStudent(Name,PhoneNo,c);
+                    mini_project.Return.insertReturn(BorrowID, c);
                     ans.setText("Done");
+                    
                 } catch (Exception ex) {
-                    Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Return.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }
           
         });
-        gp = new GridPane();
-
+       gp = new GridPane();
+        
         gp.add(name,0,0);
-        gp.add(lStudentName,0,1);
-        gp.add(tfStudentName,2, 1);
-        gp.add(lPhoneNo,0,2);
-        gp.add(tfPhoneNo,2, 2);
-        gp.add(button,2,5);
-        gp.add(ans,0,6);
+        gp.add(lborrow_id,0,1);
+        gp.add(tfborrow_id,2, 1);
+        gp.add(button,2,2);
+        gp.add(ans,0,4);
         gp.setHgap(40);
         gp.setVgap(10);
         gp.setPadding(new Insets(50, 50, 50, 50));
+        
         name.setStyle("-fx-font-size: 25px;-fx-font-weight:bold;");
-       bp = new BorderPane();
-       bp.setLeft(gp);
-       stv = new StudentTableView();
-       t = stv.getTable();
-       bp.setCenter(t);
+        bp = new BorderPane();
+        bp.setLeft(gp);
+        rtv = new ReturnTableView() ;
+        t = rtv.getTable();
+        bp.setCenter(t);
         
         
     }
@@ -96,36 +92,20 @@ public class Student {
         this.ans = ans;
     }
 
-    public Label getlStudentName() {
-        return lStudentName;
+    public Label getLborrow_id() {
+        return lborrow_id;
     }
 
-    public void setlStudentName(Label lStudentName) {
-        this.lStudentName = lStudentName;
+    public void setLborrow_id(Label lborrow_id) {
+        this.lborrow_id = lborrow_id;
     }
 
-    public Label getlPhoneNo() {
-        return lPhoneNo;
+    public TextField getTfborrow_id() {
+        return tfborrow_id;
     }
 
-    public void setlPhoneNo(Label lPhoneNo) {
-        this.lPhoneNo = lPhoneNo;
-    }
-
-    public TextField getTfStudentName() {
-        return tfStudentName;
-    }
-
-    public void setTfStudentName(TextField tfStudentName) {
-        this.tfStudentName = tfStudentName;
-    }
-
-    public TextField getTfPhoneNo() {
-        return tfPhoneNo;
-    }
-
-    public void setTfPhoneNo(TextField tfPhoneNo) {
-        this.tfPhoneNo = tfPhoneNo;
+    public void setTfborrow_id(TextField tfborrow_id) {
+        this.tfborrow_id = tfborrow_id;
     }
 
     public Button getButton() {
@@ -152,12 +132,12 @@ public class Student {
         this.bp = bp;
     }
 
-    public StudentTableView getStv() {
-        return stv;
+    public ReturnTableView getRtv() {
+        return rtv;
     }
 
-    public void setStv(StudentTableView stv) {
-        this.stv = stv;
+    public void setRtv(ReturnTableView rtv) {
+        this.rtv = rtv;
     }
 
     public TableView getT() {
@@ -167,8 +147,5 @@ public class Student {
     public void setT(TableView t) {
         this.t = t;
     }
-
-    
-    
-    
+  
 }
